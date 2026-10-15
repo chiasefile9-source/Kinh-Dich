@@ -106,4 +106,6 @@ $("logoutBtn").onclick=async()=>{try{await callServer("adminLogout",adminToken);
 $("editId").onchange=fillEditor;
 $("saveBtn").onclick=async()=>{if(!adminToken){$("saveStatus").textContent="Phiên đăng nhập không còn hiệu lực.";return;}const item={id:Number($("editId").value),name:$("editName").value,hanzi:$("editHanzi").value,theme:$("editTheme").value,meaning:$("editMeaning").value,interpretation:$("editInterpretation").value};$("saveStatus").textContent="Đang lưu...";try{const r=await callServer("saveHexagram",adminToken,item);$("saveStatus").textContent=r.message;const h=hexagrams.find(x=>x.id===item.id);Object.assign(h,item);fillSelects();renderGrid();}catch(e){$("saveStatus").textContent=e.message;if(/phiên Admin/i.test(e.message)){adminToken=null;$("editorView").classList.add("hidden");$("loginView").classList.remove("hidden");}}};
 fillSelects();renderGrid();loadData();
-</script></body></html>
+</script>
+</body>
+</html>
