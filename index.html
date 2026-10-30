@@ -1,150 +1,619 @@
 <!DOCTYPE html>
-<html lang="vi"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kiểm tra giữa kì Địa lí 10 – Có giám sát</title>
-<style>
-:root{--bg:#f6f7fb;--fg:#1b2030;--cd:#fff;--mu:#5b6478;--bd:#dfe3ee;--ac:#2563eb;--ok:#15803d;--bad:#b91c1c;--wa:#b45309;color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1420;--fg:#e8ebf4;--cd:#171d2c;--mu:#9aa4bd;--bd:#2a3350;--ac:#6b9bff;--ok:#4ade80;--bad:#f87171;--wa:#fbbf24}}
-:root[data-theme=dark]{--bg:#0f1420;--fg:#e8ebf4;--cd:#171d2c;--mu:#9aa4bd;--bd:#2a3350;--ac:#6b9bff;--ok:#4ade80;--bad:#f87171;--wa:#fbbf24}
-html{scroll-padding-top:90px}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--cd);z-index:10}
-main,section{max-width:820px;margin:0 auto;padding:12px 14px}
-.c{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin:12px 0}
-h1{font-size:22px;margin:8px 0}h2{font-size:18px}
-input[type=text],textarea{width:100%;box-sizing:border-box;padding:9px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit;margin:4px 0}
-textarea{min-height:130px}
-button{font:inherit;padding:9px 18px;border-radius:8px;border:1px solid var(--ac);background:var(--ac);color:#fff;cursor:pointer}
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--cd);border-bottom:1px solid var(--bd);display:flex;gap:14px;justify-content:space-between;padding:8px 14px;font-weight:600;flex-wrap:wrap}
-#nav{display:flex;flex-wrap:wrap;gap:5px}#nav button{padding:3px 0;width:34px;background:var(--cd);color:var(--fg);border-color:var(--bd);font-size:13px}#nav .d{background:var(--ac);color:#fff}
-.q{user-select:none;-webkit-user-select:none}
-.q label{display:block;padding:8px 10px;margin:5px 0;border:1px solid var(--bd);border-radius:8px;cursor:pointer}
-.q label:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 14%,transparent)}
-.q input{margin-right:8px}.q p{margin:8px 0}
-.lv{font-size:12px;padding:1px 9px;border-radius:99px;border:1px solid var(--bd);margin:0 8px}.l1{color:var(--ok)}.l3{color:var(--wa)}.l4{color:var(--bad)}
-small,.mu{color:var(--mu)}
-#ov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:99;display:flex;align-items:center;justify-content:center;padding:20px}
-#ov div{background:var(--cd);padding:22px;border-radius:12px;max-width:420px;border:2px solid var(--bad)}
-[hidden]{display:none!important}#wr.only .ok{display:none}
-</style></head><body>
-<section id="intro">
-<h1>🌍 Kiểm tra giữa kì – Địa lí 10 (Bài 1–7)</h1>
-<div class="c"><b>Cấu trúc:</b> 40 câu trắc nghiệm (7 điểm, mỗi câu 0,175 đ; 4 mức: Nhận biết → Vận dụng cao) + 2 câu tự luận về Bài 2 và Bài 5 (3 điểm). Thời gian: 60 phút.<br>
-<b>Đề được đảo thứ tự câu và đáp án mỗi lần tải trang.</b></div>
-<div class="c"><b>Quy chế giám sát:</b>
-<ul><li>Làm bài ở chế độ toàn màn hình.</li><li>Chuyển tab, thu nhỏ cửa sổ, thoát toàn màn hình = 1 vi phạm. <b>Quá 3 vi phạm, bài tự động nộp.</b></li><li>Sao chép, dán, chuột phải, phím tắt F12/Ctrl+C/V/U/S/P bị chặn và ghi nhật ký.</li><li>Tải lại trang giữa chừng bị ghi vào báo cáo.</li></ul></div>
-<div class="c" id="rl" hidden style="border-color:var(--bad)">⚠️ Phát hiện bạn đã tải lại trang khi đang làm bài trước đó. Sự việc sẽ được ghi vào báo cáo.</div>
-<div class="c"><input type="text" id="nm" placeholder="Họ và tên *"><input type="text" id="cl" placeholder="Lớp"><br><br><button id="go">Bắt đầu làm bài</button></div>
-</section>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề thi Kiểm tra Giữa kỳ I - KTPL 10</title>
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --danger-color: #d93025;
+            --success-color: #1e8e3e;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #202124;
+        }
 
-<section id="exam" hidden>
-<div class="bar"><span>⏱ <span id="tm">60:00</span></span><span>Đã làm <span id="pg">0</span>/40</span><span>Vi phạm <span id="vc">0/3</span></span></div>
-<div class="c" id="nav"></div>
-<main style="padding:0"><div id="qs"></div>
-<h2>Phần II. Tự luận (3,0 điểm)</h2>
-<div class="c"><b>Câu 1 (1,5 điểm – Bài 2).</b> a) Kể tên ba phương pháp biểu hiện các đối tượng địa lí trên bản đồ; mỗi phương pháp nêu một đối tượng thể hiện phù hợp. b) Hai thành phố cách nhau 6 cm trên bản đồ tỉ lệ 1 : 1 500 000. Tính khoảng cách thực tế và thời gian đi ô tô với vận tốc trung bình 60 km/h.<textarea></textarea></div>
-<div class="c"><b>Câu 2 (1,5 điểm – Bài 5).</b> a) Phân biệt nội lực và ngoại lực về nguồn năng lượng, biểu hiện và kết quả tác động. b) Giải thích vì sao dãy Himalaya vẫn tiếp tục cao lên dù bị ngoại lực bào mòn liên tục.<textarea></textarea></div>
-<button id="sb">Nộp bài</button><br><br></main>
-</section>
+        * {
+            box-sizing: border-box;
+            user-select: none; /* Chống bôi đen copy */
+            -webkit-user-select: none;
+        }
 
-<section id="res" hidden>
-<div class="c"><h1>Đã nộp bài</h1><p id="sc" style="font-size:20px;font-weight:700"></p><p class="mu" id="vl"></p></div>
-<div class="c"><b>Xem lại từng câu trắc nghiệm</b><p id="ws"></p><label><input type="checkbox" id="ow" checked> Chỉ hiện câu sai</label></div><div id="wr" class="only"></div>
-<div class="c"><b>Gợi ý chấm tự luận</b>
-<details><summary>Câu 1 – Bài 2</summary>a) Kí hiệu (mỏ khoáng sản, nhà máy), đường chuyển động (gió, dòng biển, luồng di cư), chấm điểm (dân cư phân tán), khoanh vùng (vùng khí hậu), bản đồ – biểu đồ (GDP theo tỉnh). b) 6 × 1 500 000 = 9 000 000 cm = 90 km; 90 : 60 = 1,5 giờ.</details>
-<details><summary>Câu 2 – Bài 5</summary>a) Nội lực: năng lượng trong lòng Trái Đất (phân hủy phóng xạ…), gây vận động kiến tạo, động đất, núi lửa, tạo địa hình gồ ghề. Ngoại lực: năng lượng Mặt Trời, gồm phong hóa, bóc mòn, vận chuyển, bồi tụ, có xu hướng san bằng địa hình. b) Mảng Ấn Độ – Ôxtrâylia vẫn xô vào mảng Âu – Á (nội lực nâng lên); nội lực và ngoại lực diễn ra đồng thời, độ cao là kết quả của hai quá trình ngược nhau.</details></div>
-<div class="c"><b>Báo cáo gửi giáo viên</b><textarea id="rp" readonly></textarea><button id="cp">Sao chép báo cáo</button></div>
-</section>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
 
-<div id="ov" hidden><div><h2 id="ot" style="margin-top:0;color:var(--bad)"></h2><p id="om"></p><button id="ob">Tiếp tục làm bài</button></div></div>
+        /* Header cố định */
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
 
-<script>
-const Q=[
-[2,1,"Người có thế mạnh phân tích bản đồ, ảnh viễn thám, dữ liệu không gian phù hợp nhất với nghề nào?","Chuyên viên hệ thống thông tin địa lí (GIS)","Kế toán viên","Dược sĩ lâm sàng","Biên dịch viên"],
-[1,1,"Năng lực nào là năng lực đặc thù của môn Địa lí?","Tìm hiểu địa lí","Tính toán","Thể chất","Ngôn ngữ văn chương"],
-[3,1,"Quy hoạch khu dân cư an toàn trước lũ cần ưu tiên kĩ năng địa lí nào?","Phân tích bản đồ địa hình, thủy văn kết hợp số liệu dân cư","Chỉ đếm số dân hiện tại","Chỉ dựa vào giá đất","Chỉ khảo sát theo cảm nhận"],
-[1,2,"Thể hiện hướng di chuyển của gió, dòng biển, luồng di cư thường dùng phương pháp","Đường chuyển động","Kí hiệu","Chấm điểm","Khoanh vùng"],
-[2,2,"Phương pháp bản đồ – biểu đồ thể hiện tốt nhất nội dung nào?","Giá trị, cơ cấu một đối tượng (như GDP) theo từng đơn vị lãnh thổ","Hướng di chuyển của bão","Vị trí các mỏ khoáng sản riêng lẻ","Ranh giới một vùng khí hậu"],
-[2,2,"Bản đồ tỉ lệ 1 : 2 000 000, hai điểm cách nhau 4,5 cm. Khoảng cách thực tế là","90 km","9 km","45 km","900 km"],
-[3,2,"Hai thành phố cách nhau thực tế 135 km, trên bản đồ 4,5 cm. Tỉ lệ bản đồ là","1 : 3 000 000","1 : 300 000","1 : 30 000 000","1 : 1 500 000"],
-[3,2,"Ưu việt nhất của bản đồ số (GIS) so với bản đồ giấy trong quy hoạch là","Chồng ghép, cập nhật, phân tích nhiều lớp dữ liệu nhanh","Luôn đúng tuyệt đối, không cần kiểm tra","Không phụ thuộc dữ liệu đầu vào","Không bao giờ có sai số"],
-[1,3,"Theo thuyết kiến tạo mảng, các mảng dịch chuyển trên lớp","Quyển mềm (phần trên manti)","Nhân ngoài","Vỏ lục địa","Lớp trầm tích"],
-[2,3,"Lớp nào của Trái Đất chiếm thể tích lớn nhất?","Manti","Vỏ Trái Đất","Nhân ngoài","Nhân trong"],
-[2,3,"Ở ranh giới tách giãn giữa hai mảng đại dương thường xảy ra","Macma trào lên tạo vỏ mới, hình thành sống núi ngầm","Hai mảng xô vào nhau tạo núi uốn nếp","Mảng này chìm dưới mảng kia tạo rãnh sâu","Hai mảng trượt ngang tạo đồng bằng lớn"],
-[3,3,"Dãy Himalaya hình thành chủ yếu do","Mảng Ấn Độ – Ôxtrâylia va chạm mảng Âu – Á","Mảng Thái Bình Dương tách xa mảng Bắc Mĩ","Mảng Nam Cực tách khỏi mảng Phi","Mảng Nam Mĩ chìm dưới mảng Nazca"],
-[3,3,"Dãy Andes và rãnh biển sâu ven bờ Nam Mĩ hình thành chủ yếu do","Mảng đại dương (Nazca) chìm dưới mảng lục địa Nam Mĩ","Hai mảng lục địa tách xa nhau","Mảng lục địa chìm dưới mảng đại dương","Hai mảng trượt ngang qua nhau"],
-[3,3,"Vành đai lửa Thái Bình Dương có nhiều động đất, núi lửa vì","Là nơi tiếp xúc, va chạm, hút chìm giữa các mảng kiến tạo","Có đại dương rộng nhất nên nhiệt độ cao","Là nơi vỏ Trái Đất mỏng nhất toàn cầu","Chịu bức xạ Mặt Trời mạnh nhất"],
-[4,3,"Nhận xét đúng khi so sánh vỏ lục địa với vỏ đại dương là","Vỏ lục địa dày hơn nhưng tỉ trọng nhỏ hơn","Vỏ lục địa mỏng hơn và nặng hơn","Vỏ lục địa dày hơn và nặng hơn","Hai loại vỏ dày và nặng như nhau"],
-[1,4,"Trái Đất tự quay quanh trục theo hướng","Từ tây sang đông","Từ đông sang tây","Từ bắc xuống nam","Từ nam lên bắc"],
-[2,4,"Hiện tượng nào KHÔNG phải hệ quả của chuyển động tự quay?","Sự luân phiên các mùa trong năm","Sự luân phiên ngày và đêm","Giờ khác nhau giữa các kinh tuyến","Sự lệch hướng chuyển động của vật thể"],
-[2,4,"Do lực Côriôlít, vật chuyển động ở bán cầu Bắc bị lệch về","Bên phải hướng chuyển động","Bên trái hướng chuyển động","Phía đông","Phía xích đạo"],
-[3,4,"Khi ở Luân Đôn (múi giờ 0) là 22 giờ ngày 14/3 thì ở Việt Nam (múi giờ +7) là","5 giờ ngày 15/3","15 giờ ngày 14/3","5 giờ ngày 14/3","17 giờ ngày 14/3"],
-[2,4,"Ngày 22/6, Mặt Trời lên thiên đỉnh ở","Chí tuyến Bắc","Xích đạo","Chí tuyến Nam","Vòng cực Bắc"],
-[3,4,"Ngày 22/6, tại vĩ độ 80°B có hiện tượng","Ngày kéo dài 24 giờ","Đêm kéo dài 24 giờ","Ngày đêm dài bằng nhau","Mặt Trời lên thiên đỉnh"],
-[4,4,"Ngày 22/12, so với Hà Nội (21°B), ban ngày ở TP. Hồ Chí Minh (10°B)","Dài hơn","Ngắn hơn","Bằng nhau","Dài hơn nhiều, trên 14 giờ"],
-[4,4,"Nếu trục Trái Đất vuông góc mặt phẳng quỹ đạo thì","Không có các mùa, ngày đêm dài bằng nhau quanh năm","Mùa đông ở Bắc bán cầu dài hơn","Chỉ còn một mùa ở hai cực","Mùa vẫn có do khoảng cách tới Mặt Trời đổi"],
-[1,5,"Thạch quyển bao gồm","Vỏ Trái Đất và phần trên cùng của manti","Toàn bộ lớp manti","Vỏ Trái Đất và nhân ngoài","Manti và nhân Trái Đất"],
-[2,5,"Nguồn năng lượng chủ yếu sinh ra nội lực là","Sự phân hủy chất phóng xạ và nhiệt trong lòng đất","Bức xạ Mặt Trời","Sức gió và dòng chảy","Hoạt động của con người"],
-[2,5,"Địa hình nào là kết quả chủ yếu của ngoại lực?","Đồng bằng châu thổ","Dãy núi uốn nếp","Địa hào","Sống núi giữa đại dương"],
-[2,5,"Vận động theo phương thẳng đứng của vỏ Trái Đất thường gây ra","Hiện tượng biển tiến, biển thoái","Uốn nếp và đứt gãy","Núi lửa phun trào","Sạt lở bờ sông"],
-[3,5,"Ở hoang mạc, biên độ nhiệt ngày đêm lớn, quá trình phong hóa chủ yếu là","Phong hóa vật lí","Phong hóa hóa học","Phong hóa sinh học","Xâm thực của băng hà"],
-[3,5,"Thung lũng sông hình chữ V ở vùng núi thể hiện","Xâm thực mạnh theo chiều sâu của dòng chảy","Bồi tụ phù sa ở hạ lưu","Hoạt động của sóng biển","Sụt lún giữa hai đứt gãy"],
-[4,5,"Mối quan hệ giữa nội lực và ngoại lực khi tạo địa hình là","Đối nghịch nhau nhưng diễn ra đồng thời","Ngoại lực diễn ra trước, nội lực sau","Hai lực không liên quan","Nội lực luôn san bằng địa hình do ngoại lực tạo ra"],
-[1,6,"Tầng khí quyển chứa phần lớn khối lượng không khí và các hiện tượng thời tiết là","Tầng đối lưu","Tầng bình lưu","Tầng giữa","Tầng nhiệt"],
-[2,6,"Lớp ôdôn hấp thụ tia tử ngoại nằm chủ yếu ở","Tầng bình lưu","Tầng đối lưu","Tầng nhiệt","Tầng giữa"],
-[3,6,"Đỉnh núi cao 2 500 m có nhiệt độ 8°C. Nhiệt độ chân núi (0 m) cùng sườn là (giảm 0,6°C/100 m)","23°C","15°C","20°C","14°C"],
-[3,6,"Cùng vĩ độ, nơi có biên độ nhiệt năm lớn nhất thường là","Vùng nội địa sâu trong lục địa","Vùng ven biển có dòng biển nóng","Các đảo giữa đại dương","Vùng ven biển có gió mùa"],
-[4,6,"Tây Bắc Âu ấm hơn nhiều so với Đông Canada cùng vĩ độ chủ yếu do","Dòng biển nóng Bắc Đại Tây Dương và gió Tây","Gần xích đạo hơn","Địa hình thấp hơn","Có nhiều hoang mạc hơn"],
-[1,7,"Khí áp là","Sức nén của không khí lên bề mặt Trái Đất","Lượng hơi nước trong không khí","Sức nóng của không khí","Tốc độ chuyển động của không khí"],
-[2,7,"Gió Tín phong thổi từ","Các đai cao áp cận chí tuyến về hạ áp xích đạo","Hạ áp xích đạo về cao áp cận chí tuyến","Cao áp cực về hạ áp ôn đới","Hạ áp ôn đới về cao áp cực"],
-[3,7,"Gió Tây ôn đới ở bán cầu Bắc có hướng chủ yếu là","Tây nam","Đông bắc","Tây bắc","Đông nam"],
-[2,7,"Nguyên nhân chủ yếu hình thành gió mùa là","Nóng lạnh khác nhau giữa lục địa và đại dương theo mùa","Trái Đất tự quay quanh trục","Chênh lệch nhiệt giữa ngày và đêm","Hoạt động của núi lửa"],
-[4,7,"Ban đêm vùng ven biển thường có gió từ đất liền ra biển vì","Đất liền nguội nhanh hơn nên khí áp cao hơn biển","Biển nguội nhanh hơn nên khí áp thấp hơn","Đất liền nóng hơn nên khí áp thấp","Mặt Trời chiếu biển mạnh hơn ban đêm"]];
-const $=s=>document.querySelector(s),MAX=3,LV=['','Nhận biết','Thông hiểu','Vận dụng','Vận dụng cao'];
-const shuf=a=>{a=[...a];for(let i=a.length;i>1;){const j=Math.random()*i--|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-let items,run=0,st=0,last=0,vio=[],fs=0,end,tm,rl=0,armed=0;
-try{rl=!!sessionStorage.dia10}catch(e){}
-if(rl)$('#rl').hidden=false;
-const note=m=>{if(run)vio.push(new Date().toLocaleTimeString('vi-VN')+' – '+m)};
-function warn(t,m){$('#ot').textContent=t;$('#om').textContent=m;$('#ov').hidden=false}
-function strike(m){if(!run)return;const t=Date.now();if(t-last<1500)return;last=t;st++;note('VI PHẠM: '+m);$('#vc').textContent=st+'/'+MAX;
- if(st>=MAX)submit('Quá '+MAX+' vi phạm');else warn('Cảnh báo '+st+'/'+MAX,m+'. Vi phạm lần thứ '+MAX+' bài sẽ tự động nộp.')}
-$('#ob').onclick=()=>{$('#ov').hidden=true;if(fs&&!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{})};
-$('#go').onclick=async()=>{
- if(!$('#nm').value.trim()){$('#nm').focus();return}
- try{await document.documentElement.requestFullscreen();fs=1}catch(e){}
- try{sessionStorage.dia10='1'}catch(e){}
- items=shuf(Q).map(q=>{const o=shuf(q.slice(3));return{l:q[0],b:q[1],s:q[2],o,a:o.indexOf(q[3])}});
- $('#qs').innerHTML=items.map((q,i)=>`<article class="c q" id="q${i}"><b>Câu ${i+1}</b><span class="lv l${q.l}">${LV[q.l]}</span><small>Bài ${q.b}</small><p>${q.s}</p>${q.o.map((t,k)=>`<label><input type="radio" name="r${i}" value="${k}"><b>${'ABCD'[k]}.</b> ${t}</label>`).join('')}</article>`).join('');
- $('#nav').innerHTML=items.map((_,i)=>`<button>${i+1}</button>`).join('');
- $('#intro').hidden=true;$('#exam').hidden=false;run=1;
- if(rl)vio.push('Tải lại trang khi đang làm bài trước đó');
- if(!fs)note('Trình duyệt không bật được toàn màn hình, chỉ giám sát chuyển tab');
- end=Date.now()+60*6e4;tick();tm=setInterval(tick,1000)};
-function tick(){const s=Math.max(0,Math.round((end-Date.now())/1e3));$('#tm').textContent=String(s/60|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0');if(!s)submit('Hết giờ')}
-$('#qs').onchange=e=>{$('#nav').children[+e.target.name.slice(1)].classList.add('d');$('#pg').textContent=document.querySelectorAll('#qs input:checked').length};
-$('#nav').onclick=e=>e.target.tagName=='BUTTON'&&$('#q'+(e.target.textContent-1)).scrollIntoView({behavior:'smooth'});
-$('#sb').onclick=()=>{const n=40-document.querySelectorAll('#qs input:checked').length;if(n&&!armed){armed=1;$('#sb').textContent='Còn '+n+' câu trắc nghiệm chưa làm. Bấm lần nữa để nộp';return}submit('Học sinh nộp bài')};
-function submit(why){
- if(!run)return;run=0;clearInterval(tm);$('#ov').hidden=true;
- try{sessionStorage.removeItem('dia10')}catch(e){}
- try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}
- let c=0,w=[],bad=[];
- items.forEach((q,i)=>{const r=document.querySelector(`input[name=r${i}]:checked`),p=r?+r.value:-1,ok=p==q.a;if(ok)c++;else bad.push(i+1);
- w.push(`<div class="c${ok?' ok':''}"><b>Câu ${i+1}</b> <b style="color:var(--${ok?'ok':'bad'})">${ok?'✓ Đúng':p<0?'✗ Bỏ trống':'✗ Sai'}</b> <small>(${LV[q.l]}, bài ${q.b})</small><p>${q.s}</p>${q.o.map((t,k)=>`<div style="padding:6px 10px;margin:4px 0;border-radius:8px;border:1px solid ${k==q.a?'var(--ok)':k==p?'var(--bad)':'var(--bd)'}">${'ABCD'[k]}. ${t}${k==q.a?' <b style="color:var(--ok)">✔ Đáp án đúng</b>':''}${k==p&&!ok?' <b style="color:var(--bad)">✘ Bạn đã chọn</b>':''}</div>`).join('')}</div>`)});
- const sc=(c*7/40).toFixed(2).replace('.',','),vl=vio.length?vio.join('\n'):'Không có';
- $('#sc').textContent=`Trắc nghiệm: ${c}/40 câu đúng = ${sc}/7,0 điểm (tự luận 3,0 điểm do giáo viên chấm)`;
- $('#vl').textContent=`Lí do nộp: ${why}. Số vi phạm bị tính: ${st}/${MAX}.`;
- $('#wr').innerHTML=w.join('');$('#ws').textContent=bad.length?`Bạn sai hoặc bỏ trống ${bad.length} câu: câu ${bad.join(', ')} (số câu theo thứ tự đề của bạn).`:'Bạn làm đúng toàn bộ 40 câu!';
- $('#rp').value=`Học sinh: ${$('#nm').value} – Lớp: ${$('#cl').value}\nLí do nộp: ${why}\nTrắc nghiệm: ${c}/40 (${sc}/7,0)\nCâu sai: ${bad.join(', ')||'không'}\nVi phạm tính điểm: ${st}/${MAX}\nNhật ký giám sát:\n${vl}\n\n`+[...document.querySelectorAll('textarea:not(#rp)')].map((t,i)=>`TỰ LUẬN CÂU ${i+1}:\n${t.value||'(bỏ trống)'}`).join('\n\n');
- $('#exam').hidden=true;$('#res').hidden=false;scrollTo(0,0)}
-$('#ow').onchange=e=>$('#wr').classList.toggle('only',e.target.checked);
-$('#cp').onclick=()=>{const t=$('#rp');t.select();try{navigator.clipboard.writeText(t.value)}catch(e){try{document.execCommand('copy')}catch(_){}}$('#cp').textContent='Đã sao chép ✓'};
-document.addEventListener('visibilitychange',()=>document.hidden&&strike('Chuyển tab hoặc thu nhỏ cửa sổ'));
-addEventListener('blur',()=>strike('Rời khỏi cửa sổ làm bài'));
-document.addEventListener('fullscreenchange',()=>fs&&!document.fullscreenElement&&strike('Thoát chế độ toàn màn hình'));
-['copy','cut','paste','contextmenu','dragstart'].forEach(t=>document.addEventListener(t,e=>{if(run){e.preventDefault();note('Bị chặn thao tác: '+t)}}));
-document.addEventListener('keydown',e=>{if(!run)return;const k=e.key.toLowerCase();
- if(e.key=='F12'||(e.ctrlKey||e.metaKey)&&['c','v','u','s','p'].includes(k)||e.ctrlKey&&e.shiftKey&&['i','j','c'].includes(k)){e.preventDefault();note('Bị chặn phím tắt: '+(e.ctrlKey?'Ctrl+':'')+e.key)}});
-addEventListener('beforeunload',e=>{if(run){e.preventDefault();e.returnValue=''}});
-</script></body></html>
+        .exam-info h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .timer-box {
+            background: #e8f0fe;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: #fce8e6;
+            color: var(--danger-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .exam-header-card {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-top: 5px solid var(--primary-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .exam-header-card h1 {
+            margin: 5px 0;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+        }
+
+        .student-info-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .student-info-form input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid #e8f0fe;
+            padding-bottom: 8px;
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
+        .question-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .question-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .options-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-left: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .option-label:hover {
+            background: #f1f3f4;
+        }
+
+        .option-label input {
+            margin-right: 10px;
+        }
+
+        /* Định dạng câu hỏi đúng sai */
+        .tf-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .tf-table th, .tf-table td {
+            border: 1px solid #e0e0e0;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .tf-table td:nth-child(2) {
+            text-align: left;
+        }
+
+        .submit-btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn-submit {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 36px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-submit:hover {
+            background: #1557b0;
+        }
+
+        /* Chế độ xem đáp án */
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .feedback.correct {
+            background-color: #e6f4ea;
+            color: #137333;
+            border: 1px solid #ceedd5;
+        }
+
+        .feedback.incorrect {
+            background-color: #fce8e6;
+            color: #c5221f;
+            border: 1px solid #fad2cf;
+        }
+
+        .explanation {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            font-style: italic;
+        }
+
+        #result-summary {
+            display: none;
+            background: #e8f0fe;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 2px solid var(--primary-color);
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        @media (max-width: 600px) {
+            .student-info-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;" onselectstart="return false;">
+
+    <header>
+        <div class="exam-info">
+            <h2>KTPL 10 - GIỮA KỲ I</h2>
+        </div>
+        <div class="warning-box" id="warning-box">
+            Vi phạm tab: <span id="violation-count">0</span>/3
+        </div>
+        <div class="timer-box" id="timer">45:00</div>
+    </header>
+
+    <div class="container">
+        <div class="exam-header-card">
+            <h3>SỞ GIÁO DỤC VÀ ĐÀO TẠO TRƯỜNG THPT KLYRO</h3>
+            <h1>ĐỀ KIỂM TRA GIỮA KỲ I - NĂM HỌC 2026 - 2027</h1>
+            <p><strong>MÔN: GIÁO DỤC KINH TẾ VÀ PHÁP LUẬT 10</strong> | Thời gian: 45 phút</p>
+            
+            <div class="student-info-form">
+                <div>
+                    <label>Họ và tên:</label>
+                    <input type="text" id="student-name" placeholder="Nhập họ tên...">
+                </div>
+                <div>
+                    <label>Số báo danh:</label>
+                    <input type="text" id="student-sbd" placeholder="Nhập SBD...">
+                </div>
+                <div>
+                    <label>Mã đề:</label>
+                    <input type="text" value="101" disabled>
+                </div>
+            </div>
+        </div>
+
+        <!-- BẢNG KẾT QUẢ SAU KHI NỘP -->
+        <div id="result-summary">
+            <h2>KẾT QUẢ BÀI THI</h2>
+            <p style="font-size: 1.3rem;">Điểm Trắc nghiệm: <strong id="score-text" style="color: var(--danger-color);">0.0</strong> / 8.0</p>
+            <p><i>(Phần tự luận 2.0 điểm sẽ được giáo viên chấm trực tiếp)</i></p>
+            <p id="violation-log" style="color: var(--danger-color); font-weight: bold;"></p>
+        </div>
+
+        <form id="exam-form">
+            <!-- PHẦN I -->
+            <div class="section-card">
+                <h3 class="section-title">PHẦN I. CÂU TRẮC NGHIỆM NHIỀU PHƯƠNG ÁN LỰA CHỌN (6,0 điểm)</h3>
+                <p><i>Chọn phương án đúng nhất cho các câu từ 1 đến 24.</i></p>
+                <div id="part1-questions"></div>
+            </div>
+
+            <!-- PHẦN II -->
+            <div class="section-card">
+                <h3 class="section-title">PHẦN II. CÂU TRẮC NGHIỆM ĐÚNG - SAI (2,0 điểm)</h3>
+                <p><i>Chọn Đúng hoặc Sai cho mỗi ý a, b, c, d.</i></p>
+                <div id="part2-questions"></div>
+            </div>
+
+            <!-- PHẦN III -->
+            <div class="section-card">
+                <h3 class="section-title">PHẦN III. CÂU HỎI TỰ LUẬN (2,0 điểm)</h3>
+                
+                <div class="question-item">
+                    <p class="question-title">Câu 1 (1,25 điểm):</p>
+                    <p>Em hãy phân tích vai trò của các hoạt động kinh tế cơ bản trong đời sống xã hội (Sản xuất, Phân phối - trao đổi, Tiêu dùng). Trong các hoạt động đó, hoạt động nào đóng vai trò quyết định nhất? Vì sao?</p>
+                    <textarea placeholder="Nhập lời giải tự luận của em vào đây..."></textarea>
+                    <div class="feedback essay-guide" id="essay1-guide">
+                        <strong>Dàn ý / Gợi ý đáp án:</strong>
+                        <ul>
+                            <li><b>Sản xuất:</b> Tạo ra sản phẩm vật chất và tinh thần thỏa mãn nhu cầu con người. Là hoạt động cơ bản nhất, quyết định sự tồn tại và phát triển của xã hội.</li>
+                            <li><b>Phân phối - Trao đổi:</b> Cầu nối giữa sản xuất và tiêu dùng. Phân phối xác định tỉ lệ sản phẩm người lao động nhận được; Trao đổi đưa sản phẩm đến tay người tiêu dùng.</li>
+                            <li><b>Tiêu dùng:</b> Mục đích của sản xuất, thỏa mãn nhu cầu con người và tạo động lực cho sản xuất phát triển.</li>
+                            <li><b>Hoạt động quyết định nhất:</b> Hoạt động <u>sản xuất</u>. Vì không có sản xuất thì không có sản phẩm để phân phối, trao đổi và tiêu dùng.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-title">Câu 2 (0,75 điểm):</p>
+                    <p>Trình bày khái niệm Ngân sách nhà nước. Theo em, học sinh THPT có thể thể hiện trách nhiệm và nghĩa vụ của mình đối với Ngân sách nhà nước thông qua những việc làm cụ thể nào?</p>
+                    <textarea placeholder="Nhập lời giải tự luận của em vào đây..."></textarea>
+                    <div class="feedback essay-guide" id="essay2-guide">
+                        <strong>Dàn ý / Gợi ý đáp án:</strong>
+                        <ul>
+                            <li><b>Khái niệm NSNN:</b> Là toàn bộ các khoản thu, chi của Nhà nước được dự toán và thực hiện trong một khoảng thời gian nhất định do cơ quan nhà nước có thẩm quyền quyết định để bảo đảm thực hiện các chức năng, nhiệm vụ của Nhà nước.</li>
+                            <li><b>Trách nhiệm của học sinh THPT:</b>
+                                <ul>
+                                    <li>Chấp hành tốt pháp luật về thuế, phí, lệ phí (ví dụ: lấy hóa đơn khi mua hàng).</li>
+                                    <li>Sử dụng tiết kiệm, hiệu quả tài sản công (điện, nước, cơ sở vật chất trường học).</li>
+                                    <li>Tuyên truyền người thân, gia đình thực hiện đầy đủ nghĩa vụ nộp thuế.</li>
+                                    <li>Phê phán các hành vi thất thoát, lãng phí ngân sách nhà nước.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit-btn-container">
+                <button type="button" class="btn-submit" onclick="confirmSubmit()">NỘP BÀI THI</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // DỮ LIỆU CÂU HỎI PHẦN I
+        const part1Data = [
+            { id: 1, q: "Hoạt động nào dưới đây đóng vai trò là hoạt động cơ bản nhất trong các hoạt động của con người?", options: ["A. Hoạt động phân phối.", "B. Hoạt động trao đổi.", "C. Hoạt động tiêu dùng.", "D. Hoạt động sản xuất."], correct: 3, exp: "Sản xuất là hoạt động tạo ra sản phẩm, quyết định sự tồn tại của con người." },
+            { id: 2, q: "Trong đời sống xã hội, hoạt động đưa sản phẩm từ người sản xuất đến tay người tiêu dùng được gọi là gì?", options: ["A. Hoạt động sản xuất.", "B. Hoạt động phân phối - trao đổi.", "C. Hoạt động tiêu dùng.", "D. Hoạt động lưu kho."], correct: 1, exp: "Phân phối - trao đổi đóng vai trò cầu nối đưa sản phẩm từ sản xuất đến tiêu dùng." },
+            { id: 3, q: "Những người mua hàng hóa, dịch vụ để thỏa mãn nhu cầu sinh hoạt và sản xuất thuộc loại chủ thể nào?", options: ["A. Chủ thể sản xuất.", "B. Chủ thể tiêu dùng.", "C. Chủ thể trung gian.", "D. Chủ thể nhà nước."], correct: 1, exp: "Chủ thể tiêu dùng là người mua và sử dụng hàng hóa, dịch vụ." },
+            { id: 4, q: "Trong nền kinh tế, các cá nhân, tổ chức đảm nhiệm vai trò cầu nối giữa chủ thể sản xuất và chủ thể tiêu dùng được gọi là:", options: ["A. Chủ thể trung gian.", "B. Chủ thể nhà nước.", "C. Chủ thể tiêu dùng.", "D. Chủ thể độc quyền."], correct: 0, exp: "Chủ thể trung gian (thương lái, đại lý, môi giới...) kết nối sản xuất và tiêu dùng." },
+            { id: 5, q: "Lĩnh vực trao đổi, mua bán mà ở đó các chủ thể kinh tế tác động qua lại lẫn nhau để xác định giá cả và số lượng hàng hóa là khái niệm của:", options: ["A. Thị trường.", "B. Cơ chế thị trường.", "C. Ngân sách nhà nước.", "D. Cạnh tranh kinh tế."], correct: 0, exp: "Đó là định nghĩa cơ bản của Thị trường." },
+            { id: 6, q: "Hệ thống các quan hệ kinh tế mang tính tự điều chỉnh tuân theo yêu cầu của các quy luật kinh tế chi phối hoạt động của các chủ thể gọi là:", options: ["A. Cơ chế bao cấp.", "B. Cơ chế thị trường.", "C. Cơ chế kế hoạch hóa.", "D. Cơ chế tập trung."], correct: 1, exp: "Cơ chế thị trường là hệ thống tự điều chỉnh theo các quy luật kinh tế." },
+            { id: 7, q: "Số tiền phải trả cho một hàng hóa để bù đắp những chi phí sản xuất và lưu thông hàng hóa đó gọi là:", options: ["A. Giá cả hàng hóa.", "B. Giá trị thặng dư.", "C. Lợi nhuận gộp.", "D. Chi phí chìm."], correct: 0, exp: "Giá cả hàng hóa là biểu hiện bằng tiền của giá trị hàng hóa." },
+            { id: 8, q: "Giá bán thực tế của hàng hóa trên thị trường được thỏa thuận giữa người mua và người bán tại một thời điểm nhất định gọi là:", options: ["A. Giá cả thị trường.", "B. Giá niêm yết.", "C. Giá định hướng.", "D. Giá sàn quy định."], correct: 0, exp: "Giá cả thị trường hình thành dựa trên sự thỏa thuận thực tế giữa người mua và bán." },
+            { id: 9, q: "Chức năng nào dưới đây của thị trường giúp người sản xuất điều chỉnh quy mô sản xuất và người tiêu dùng điều chỉnh việc mua sắm có lợi nhất?", options: ["A. Chức năng thông tin.", "B. Chức năng thực hiện.", "C. Chức năng cất trữ.", "D. Chức năng đo lường."], correct: 0, exp: "Chức năng thông tin giúp căn cứ vào giá cả, số lượng để điều chỉnh hành vi." },
+            { id: 10, q: "Trong nền kinh tế hàng hóa, quy luật kinh tế nào buộc các chủ thể sản xuất kinh doanh phải thường xuyên cải tiến kỹ thuật và nâng cao năng suất?", options: ["A. Quy luật cạnh tranh.", "B. Quy luật lưu thông tiền tệ.", "C. Quy luật độc quyền.", "D. Quy luật phân phối."], correct: 0, exp: "Quy luật cạnh tranh tạo sức ép buộc các đơn vị cải tiến để tồn tại." },
+            { id: 11, q: "Hiện tượng các chủ thể kinh tế tự do cạnh tranh, dẫn đến phân hóa giàu nghèo và nguy cơ cạn kiệt tài nguyên thể hiện khía cạnh nào của cơ chế thị trường?", options: ["A. Nhược điểm của cơ chế thị trường.", "B. Ưu điểm của cơ chế thị trường.", "C. Chức năng của giá cả.", "D. Vai trò của chủ thể nhà nước."], correct: 0, exp: "Phân hóa giàu nghèo và suy thoái môi trường là nhược điểm của cơ chế thị trường." },
+            { id: 12, q: "Chủ thể nào trong nền kinh tế có vai trò quản lý vĩ mô, tạo môi trường pháp lý thuận lợi và khắc phục các thất bại của thị trường?", options: ["A. Chủ thể Nhà nước.", "B. Chủ thể trung gian.", "C. Chủ thể tiêu dùng.", "D. Chủ thể sản xuất."], correct: 0, exp: "Nhà nước thực hiện chức năng quản lý vĩ mô kinh tế." },
+            { id: 13, q: "Toàn bộ các khoản thu, chi của Nhà nước được dự toán và thực hiện trong một khoảng thời gian nhất định do cơ quan nhà nước có thẩm quyền quyết định gọi là:", options: ["A. Ngân sách nhà nước.", "B. Tài chính doanh nghiệp.", "C. Quỹ bảo hiểm xã hội.", "D. Tín dụng thương mại."], correct: 0, exp: "Đây là định nghĩa chuẩn theo Luật Ngân sách nhà nước." },
+            { id: 14, q: "Theo quy định của Luật Ngân sách nhà nước, cơ quan nào dưới đây có quyền quyết định dự toán và phân bổ ngân sách nhà nước?", options: ["A. Quốc hội và Hội đồng nhân dân các cấp.", "B. Các tập đoàn kinh tế tư nhân.", "C. Chủ hộ kinh doanh gia đình.", "D. Các ngân hàng thương mại cổ phần."], correct: 0, exp: "Quốc hội (trung ương) và HĐND các cấp (địa phương) có thẩm quyền này." },
+            { id: 15, q: "Khoản nộp ngân sách nhà nước bắt buộc của tổ chức, hộ gia đình, hộ kinh doanh, cá nhân theo quy định của pháp luật gọi là:", options: ["A. Thuế.", "B. Phí dịch vụ.", "C. Lệ phí hành chính.", "D. Tiền ủng hộ."], correct: 0, exp: "Thuế có tính chất bắt buộc và pháp lý cao nhất." },
+            { id: 16, q: "Loại thuế nào sau đây được cấu thành trong giá bán của hàng hóa, dịch vụ và do người tiêu dùng cuối cùng chi trả?", options: ["A. Thuế giá trị gia tăng.", "B. Thuế thu nhập cá nhân.", "C. Thuế thu nhập doanh nghiệp.", "D. Thuế tài sản."], correct: 0, exp: "Thuế GTGT (VAT) là thuế gián thu đánh vào người tiêu dùng cuối cùng." },
+            { id: 17, q: "Chủ thể kinh tế nào dưới đây đã vận dụng đúng ưu điểm của cơ chế thị trường?", options: ["A. Doanh nghiệp X cải tiến quy trình công nghệ để giảm giá thành và tăng chất lượng.", "B. Cửa hàng Y tích trữ găm hàng để thổi giá trong đợt dịch bệnh.", "C. Công ty Z sản xuất hàng giả nhái thương hiệu nổi tiếng.", "D. Cơ sở T xả thải trực tiếp ra sông để tiết kiệm chi phí."], correct: 0, exp: "Cải tiến công nghệ nâng cao chất lượng là phát huy ưu điểm của thị trường." },
+            { id: 18, q: "Nguồn thu nào dưới đây đóng vai trò chủ yếu và bền vững nhất trong tổng thu Ngân sách nhà nước?", options: ["A. Thu từ thuế, phí và lệ phí.", "B. Thu từ vay nợ nước ngoài.", "C. Thu từ viện trợ không hoàn lại.", "D. Thu từ phát hành tiền tệ."], correct: 0, exp: "Thuế, phí, lệ phí là nguồn thu nội địa chủ yếu và bền vững." },
+            { id: 19, q: "Khi giá thịt lợn trên thị trường tăng cao đột biến, người tiêu dùng chuyển sang mua thịt gà và cá để tiết kiệm chi phí. Người tiêu dùng đã căn cứ vào:", options: ["A. Chức năng thông tin của giá cả thị trường.", "B. Quyết định xử phạt của Nhà nước.", "C. Mệnh lệnh của chủ thể sản xuất.", "D. Chính sách ưu đãi xuất khẩu."], correct: 0, exp: "Giá cả cung cấp thông tin giúp người mua điều chỉnh tiêu dùng có lợi nhất." },
+            { id: 20, q: "Hoạt động nào dưới đây đóng vai trò là cầu nối nối liền sản xuất với tiêu dùng trong đời sống kinh tế?", options: ["A. Phân phối - trao đổi.", "B. Sản xuất vật chất.", "C. Tiêu dùng sản phẩm.", "D. Sáng chế công nghệ."], correct: 0, exp: "Phân phối - trao đổi nối liền 2 khâu sản xuất và tiêu dùng." },
+            { id: 21, q: "Các đại lý bán buôn, bán lẻ, trung tâm thương mại và môi giới thương mại tham gia thị trường với vai trò chính là:", options: ["A. Chủ thể trung gian.", "B. Chủ thể quản lý nhà nước.", "C. Chủ thể tiêu dùng cuối cùng.", "D. Chủ thể sản xuất trực tiếp."], correct: 0, exp: "Các kênh phân phối này hoạt động như chủ thể trung gian." },
+            { id: 22, q: "Doanh nghiệp A chủ động đầu tư hệ thống xử lý nước thải đạt chuẩn trước khi xả ra môi trường. Việc làm này thể hiện trách nhiệm gì của chủ thể sản xuất?", options: ["A. Trách nhiệm đối với sự phát triển bền vững của xã hội.", "B. Trách nhiệm tối đa hóa lợi nhuận bằng mọi giá.", "C. Trách nhiệm cạnh tranh không lành mạnh.", "D. Trách nhiệm thu hẹp quy mô kinh doanh."], correct: 0, exp: "Bảo vệ môi trường thể hiện trách nhiệm xã hội và phát triển bền vững." },
+            { id: 23, q: "Trường hợp nào dưới đây phản ánh hiện tượng bội chi ngân sách nhà nước?", options: ["A. Tổng số chi ngân sách lớn hơn tổng số thu ngân sách.", "B. Tổng số thu ngân sách bằng tổng số chi ngân sách.", "C. Tổng số thu ngân sách lớn hơn tổng số chi ngân sách.", "D. Ngân sách không có khoản chi nào cho đầu tư."], correct: 0, exp: "Bội chi (thâm hụt) xảy ra khi Chi > Thu." },
+            { id: 24, q: "Doanh nghiệp may mặc M thưởng hai tháng lương Tết cho công nhân đạt năng suất cao. Việc phân phối kết quả lao động này có tác dụng gì?", options: ["A. Tạo động lực kích thích người lao động nâng cao năng suất.", "B. Kìm hãm sự phát triển của doanh nghiệp.", "C. Làm suy giảm tính cạnh tranh của sản phẩm.", "D. Vi phạm quy định của Luật Ngân sách."], correct: 0, exp: "Phân phối hợp lý giúp tạo động lực cho người lao động." }
+        ];
+
+        // DỮ LIỆU CÂU HỎI PHẦN II (ĐÚNG - SAI)
+        const part2Data = [
+            {
+                id: 1,
+                context: "Nhận thấy nhu cầu tiêu thụ hoa tươi dịp lễ 8/3 của người dân rất lớn, hai bạn K và T (học sinh lớp 10) đã xin phép gia đình dùng tiền tiết kiệm để nhập hoa tươi về bán tại địa điểm gần cổng trường và quảng cáo trên mạng xã hội. Nhờ khéo tay và phục vụ nhiệt tình, hai bạn đã bán hết hàng và thu được một khoản lợi nhuận nhỏ. K và T dự định dùng số tiền này để đăng ký một khóa học cắm hoa nghệ thuật nhằm phát triển năng khiếu.",
+                items: [
+                    { key: "a", text: "Bạn K và bạn T đã nhạy bén nắm bắt chức năng thông tin của thị trường để tiến hành hoạt động sản xuất kinh doanh dịch vụ hoa tươi.", correct: true, exp: "Đúng, các bạn căn cứ nhu cầu thị trường dịp 8/3." },
+                    { key: "b", text: "Số tiền lãi thu được dùng để đăng ký khóa học cắm hoa thể hiện việc sử dụng thu nhập cho phát triển bản thân và tái đầu tư năng lực.", correct: true, exp: "Đúng, học nâng cao kỹ năng chính là tái đầu tư cho bản thân." },
+                    { key: "c", text: "Trong tình huống trên, bạn K và T chỉ đóng vai trò là chủ thể sản xuất mà không đóng vai trò là chủ thể tiêu dùng.", correct: false, exp: "Sai, K và T cũng là chủ thể tiêu dùng (nhập hoa, mua đồ dùng, mua khóa học)." },
+                    { key: "d", text: "Hoạt động kinh doanh của K và T vừa đáp ứng nhu cầu thị trường, vừa giúp hai bạn trải nghiệm thực tiễn và tạo thu nhập chính đáng.", correct: true, exp: "Đúng, hoạt động mang lại hiệu quả thực tiễn cao." }
+                ]
+            },
+            {
+                id: 2,
+                context: "Công ty Z chuyên sản xuất thực phẩm đóng hộp. Nắm bắt xu hướng người tiêu dùng ngày càng quan tâm đến sức khỏe và lối sống xanh, Giám đốc công ty Z quyết định đổi mới công nghệ, chuyển sang sử dụng nguyên liệu hữu cơ và bao bì dễ tái chế thân thiện với môi trường. Đồng thời, công ty trích một phần quỹ khen thưởng để hỗ trợ con em công nhân có hoàn cảnh khó khăn. Nhờ đó, doanh thu của công ty tăng 20% và người lao động rất phấn khởi, yên tâm làm việc.",
+                items: [
+                    { key: "a", text: "Công ty Z đã vận dụng tốt chức năng định hướng và điều tiết của thị trường để chuyển đổi cơ cấu sản xuất.", correct: true, exp: "Đúng, đã chuyển đổi theo xu hướng xanh của thị trường." },
+                    { key: "b", text: "Việc chú trọng sản xuất sản phẩm xanh và bao bì tái chế thể hiện trách nhiệm của chủ thể sản xuất đối với sự phát triển bền vững.", correct: true, exp: "Đúng, đáp ứng các tiêu chuẩn bảo vệ môi trường." },
+                    { key: "c", text: "Hành động trích quỹ thưởng hỗ trợ gia đình công nhân làm gia tăng chi phí bất hợp lý và suy giảm sức cạnh tranh của doanh nghiệp.", correct: false, exp: "Sai, đây là chính sách an sinh tạo động lực giúp doanh nghiệp tăng 20% doanh thu." },
+                    { key: "d", text: "Sự kết hợp giữa nâng cao chất lượng sản phẩm và thực hiện tốt chính sách đãi ngộ người lao động giúp doanh nghiệp phát triển bền vững.", correct: true, exp: "Đúng, phát triển cả về kinh tế lẫn yếu tố con người." }
+                ]
+            }
+        ];
+
+        // RENDER GIAO DIỆN CÂU HỎI
+        function renderExam() {
+            // Phần I
+            const p1Container = document.getElementById('part1-questions');
+            p1Container.innerHTML = part1Data.map(q => `
+                <div class="question-item" id="p1-q${q.id}">
+                    <p class="question-title">Câu ${q.id}: ${q.q}</p>
+                    <div class="options-group">
+                        ${q.options.map((opt, index) => `
+                            <label class="option-label">
+                                <input type="radio" name="p1_q${q.id}" value="${index}">
+                                ${opt}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="feedback-p1-q${q.id}"></div>
+                </div>
+            `).join('');
+
+            // Phần II
+            const p2Container = document.getElementById('part2-questions');
+            p2Container.innerHTML = part2Data.map(q => `
+                <div class="question-item" id="p2-q${q.id}">
+                    <p class="question-title">Câu ${q.id}: Đọc đoạn thông tin sau:</p>
+                    <blockquote style="background: #f0f4f9; padding: 10px; border-left: 4px solid var(--primary-color); margin: 5px 0;">
+                        "${q.context}"
+                    </blockquote>
+                    <table class="tf-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">Ý</th>
+                                <th>Nội dung</th>
+                                <th style="width: 80px;">Đúng</th>
+                                <th style="width: 80px;">Sai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${q.items.map(item => `
+                                <tr>
+                                    <td><b>${item.key})</b></td>
+                                    <td>${item.text}</td>
+                                    <td><input type="radio" name="p2_q${q.id}_${item.key}" value="true"></td>
+                                    <td><input type="radio" name="p2_q${q.id}_${item.key}" value="false"></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    <div class="feedback" id="feedback-p2-q${q.id}"></div>
+                </div>
+            `).join('');
+        }
+
+        // HỆ THỐNG GIÁM SÁT VÀ CHỐNG GIAN LẬN
+        let violationCount = 0;
+        const maxViolations = 3;
+        let isSubmitted = false;
+
+        function addViolation() {
+            if (isSubmitted) return;
+            violationCount++;
+            document.getElementById('violation-count').innerText = violationCount;
+            
+            if (violationCount >= maxViolations) {
+                alert("BẠN ĐÃ VI PHẠM RỜI MÀN HÌNH QUÁ 3 LẦN! BÀI THI SẼ TỰ ĐỘNG NỘP.");
+                submitExam(true);
+            } else {
+                alert(`CẢNH BÁO: Bạn đã chuyển tab hoặc rời màn hình làm bài (${violationCount}/${maxViolations} lần). Vi phạm quá 3 lần bài thi sẽ tự động nộp!`);
+            }
+        }
+
+        // Bắt sự kiện rời tab / thu nhỏ trình duyệt
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) addViolation();
+        });
+
+        window.addEventListener("blur", () => {
+            // Phòng ngừa trường hợp click ra ngoài window
+            // addViolation();
+        });
+
+        // Bắt phím tắt mở DevTools
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "F12" || 
+               (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
+               (e.ctrlKey && e.key === "u")) {
+                e.preventDefault();
+                alert("Hành vi bị cấm trong quá trình làm bài!");
+            }
+        });
+
+        // ĐẾM NGƯỢC THỜI GIAN (45 Phút)
+        let totalSeconds = 45 * 60;
+        const timerElement = document.getElementById('timer');
+
+        const timerInterval = setInterval(() => {
+            if (isSubmitted) {
+                clearInterval(timerInterval);
+                return;
+            }
+
+            totalSeconds--;
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds % 60;
+
+            timerElement.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            if (totalSeconds <= 0) {
+                clearInterval(timerInterval);
+                alert("Đã hết thời gian làm bài! Hệ thống tự động nộp bài.");
+                submitExam(false);
+            }
+        }, 1000);
+
+        // XÁC NHẬN NỘP BÀI
+        function confirmSubmit() {
+            if (confirm("Bạn có chắc chắn muốn nộp bài thi không?")) {
+                submitExam(false);
+            }
+        }
+
+        // TÍNH ĐIỂM VÀ HIỂN THỊ ĐÁP ÁN
+        function submitExam(isForced = false) {
+            if (isSubmitted) return;
+            isSubmitted = true;
+
+            let scoreP1 = 0;
+            let scoreP2 = 0;
+
+            // Chấm Phần I (24 câu, mỗi câu 0.25đ = 6.0đ)
+            part1Data.forEach(q => {
+                const selected = document.querySelector(`input[name="p1_q${q.id}"]:checked`);
+                const fbDiv = document.getElementById(`feedback-p1-q${q.id}`);
+                fbDiv.style.display = "block";
+
+                if (selected) {
+                    const userAns = parseInt(selected.value);
+                    if (userAns === q.correct) {
+                        scoreP1 += 0.25;
+                        fbDiv.className = "feedback correct";
+                        fbDiv.innerHTML = `<b>Đúng!</b> ${q.exp}`;
+                    } else {
+                        fbDiv.className = "feedback incorrect";
+                        fbDiv.innerHTML = `<b>Sai!</b> Đáp án đúng là: <b>${q.options[q.correct]}</b>.<br><span class="explanation">${q.exp}</span>`;
+                    }
+                } else {
+                    fbDiv.className = "feedback incorrect";
+                    fbDiv.innerHTML = `<b>Chưa chọn!</b> Đáp án đúng là: <b>${q.options[q.correct]}</b>.<br><span class="explanation">${q.exp}</span>`;
+                }
+            });
+
+            // Chấm Phần II (2 câu, mỗi câu tối đa 1.0đ = 2.0đ)
+            // Quy tắc chấm Chuẩn BGD: Đúng 1 ý: 0.1đ | Đúng 2 ý: 0.25đ | Đúng 3 ý: 0.5đ | Đúng 4 ý: 1.0đ
+            part2Data.forEach(q => {
+                let correctCount = 0;
+                let detailLog = [];
+
+                q.items.forEach(item => {
+                    const selected = document.querySelector(`input[name="p2_q${q.id}_${item.key}"]:checked`);
+                    const isCorrectVal = (item.correct) ? "true" : "false";
+
+                    if (selected && selected.value === isCorrectVal) {
+                        correctCount++;
+                        detailLog.push(`Ý ${item.key}: ĐÚNG`);
+                    } else {
+                        detailLog.push(`Ý ${item.key}: SAI (Đáp án đúng: ${item.correct ? 'Đúng' : 'Sai'})`);
+                    }
+                });
+
+                // Tính điểm theo quy chuẩn
+                let qScore = 0;
+                if (correctCount === 1) qScore = 0.1;
+                else if (correctCount === 2) qScore = 0.25;
+                else if (correctCount === 3) qScore = 0.5;
+                else if (correctCount === 4) qScore = 1.0;
+
+                scoreP2 += qScore;
+
+                const fbDiv = document.getElementById(`feedback-p2-q${q.id}`);
+                fbDiv.style.display = "block";
+                fbDiv.className = (correctCount === 4) ? "feedback correct" : "feedback incorrect";
+                fbDiv.innerHTML = `<b>Kết quả: Đúng ${correctCount}/4 ý (${qScore} điểm)</b><br>` + 
+                                  detailLog.join(' | ');
+            });
+
+            // Hiển thị hướng dẫn tự luận
+            document.querySelectorAll('.essay-guide').forEach(el => el.style.display = 'block');
+
+            // Tổng điểm
+            const totalScore = (scoreP1 + scoreP2).toFixed(2);
+
+            // Vô hiệu hóa Form
+            const inputs = document.querySelectorAll('input, textarea, button');
+            inputs.forEach(i => i.disabled = true);
+
+            // Hiển thị bảng điểm tổng kết
+            const summaryDiv = document.getElementById('result-summary');
+            summaryDiv.style.display = 'block';
+            document.getElementById('score-text').innerText = totalScore;
+
+            if (isForced) {
+                document.getElementById('violation-log').innerText = "Bài thi đã bị tự động nộp do vi phạm quy chế giám sát quá 3 lần!";
+            } else if (violationCount > 0) {
+                document.getElementById('violation-log').innerText = `Ghi nhận vi phạm rời màn hình: ${violationCount} lần.`;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // TỰ ĐỘNG KHỞI TẠO BÀI THI
+        window.onload = renderExam;
+    </script>
+</body>
+</html>
